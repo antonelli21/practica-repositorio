@@ -1,38 +1,46 @@
 
-DISTANCIAS_A_CAPITAL = {
-    "moron": 30,
-    "ramos mejia": 22,
-    "castelar": 33,
-    "san justo": 25
-}
+import random
+import time
 
-def calcular_itinerario(ubicacion: str, es_ida_y_vuelta: bool = True, desvio_km: float = 0.0) -> float:
+# Inicializamos la vida de los luchadores
+vida_subzero = 100
+vida_scorpion = 100
 
-    # Normalizamos el texto para evitar problemas con mayúsculas
-    origen = ubicacion.lower().strip()
+print("¡FIGHT!")
+print("-" * 30)
+
+# El bucle sigue mientras ambos tengan más de 0 de vida
+while vida_subzero > 0 and vida_scorpion > 0:
     
-    # Validación de existencia de la localidad
-    if origen not in DISTANCIAS_A_CAPITAL:
-        raise ValueError(f"Lo siento, la ubicación '{ubicacion}' no está registrada en el sistema.")
+    # --- Turno de Scorpion ---
+    golpe_scorpion = random.randint(2, 10)
+    vida_subzero -= golpe_scorpion
+    # Evitamos que la vida quede en números negativos
+    if vida_subzero < 0: vida_subzero = 0
+    
+    print(f"🔥 Scorpion mete un combo y quita {golpe_scorpion} de vida.")
+    print(f"❄️ Sub-Zero queda con {vida_subzero} HP.\n")
+    
+    # Verificamos si Sub-Zero ya cayó para terminar la pelea inmediatamente
+    if vida_subzero <= 0:
+        break
         
-    distancia_base = DISTANCIAS_A_CAPITAL[origen]
+    time.sleep(1) # Una pequeña pausa para darle emoción a la consola
     
-    # Aplicamos la lógica del trayecto
-    multiplicador_trayecto = 2 if es_ida_y_vuelta else 1
-    distancia_total = (distancia_base * multiplicador_trayecto) + desvio_km
+    # --- Turno de Sub-Zero ---
+    golpe_subzero = random.randint(2, 10)
+    vida_scorpion -= golpe_subzero
+    if vida_scorpion < 0: vida_scorpion = 0
     
-    return distancia_total
+    print(f"❄️ Sub-Zero congela el piso y quita {golpe_subzero} de vida.")
+    print(f"🔥 Scorpion queda con {vida_scorpion} HP.\n")
+    
+    time.sleep(1)
+    print("-" * 30)
 
-# --- Bloque Principal / Prueba del código ---
-try:
-    mi_ubicacion = "Morón"
-    
-    # Calculamos un viaje de ida y vuelta sumando 5km de un desvío (por ejemplo, pasar por una estación de servicio)
-    km_totales = calcular_itinerario(ubicacion=mi_ubicacion, es_ida_y_vuelta=True, desvio_km=5.0)
-    
-    print(f"--- Reporte de Viaje ---")
-    print(f"Origen: {mi_ubicacion.title()}")
-    print(f"Distancia total calculada: {km_totales} km")
-
-except ValueError as e:
-    print(f"Error en el cálculo: {e}")
+# --- Fin de la pelea ---
+print("¡FIN DE LA PELEA!")
+if vida_subzero > 0:
+    print("❄️ ¡SUB-ZERO WINS! FLAWLESS VICTORY.")
+else:
+    print("🔥 ¡SCORPION WINS! TOASTY.")
