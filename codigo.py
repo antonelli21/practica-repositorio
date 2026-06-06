@@ -40,7 +40,15 @@ while vida_subzero > 0 and vida_scorpion > 0:
 
 # --- Fin de la pelea ---
 print("¡FIN DE LA PELEA!")
-if vida_subzero > 0:
+
+# 1. Primero chequeamos la condición especial del empate en 25
+if vida_subzero == 25 and vida_scorpion == 25:
+    print("🟢 ¡LOOK LA LUNA! 🟢")
+    print("🦎 ¡REPTILE HAS ENTERED THE COMBAT! CHOOSE YOUR DESTINY.")
+
+# 2. Si no se dio el Easter Egg, revisamos quién quedó en pie
+elif vida_subzero > 0:
     print("❄️ ¡SUB-ZERO WINS! FLAWLESS VICTORY.")
+    
 else:
     print("🔥 ¡SCORPION WINS! TOASTY.")
