@@ -1,7 +1,7 @@
 
 DISTANCIAS_A_CAPITAL = {
     "moron": 30,
-    "ramos mejia": 22,
+    "ramos mejia": 240,
     "castelar": 33,
     "san justo": 25
 }
