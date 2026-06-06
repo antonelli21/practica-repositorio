@@ -1,3 +1,3 @@
-nombre = "takeda"
+nombre = "scorpion"
 print ("Hola " + nombre)
   
